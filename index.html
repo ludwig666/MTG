@@ -9,9 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="app">
-      <h1>Make me dynamic!</h1>
-    </div>
+  <div id="app">
+    <h1>{{ message }}</h1>
+    <p>Count is: {{ counter.count }}</p>
+  </div>
     <script type="module">
     const { createApp, reactive, ref } = Vue;
     
