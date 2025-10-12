@@ -4,8 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>テストページ</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.css" rel="stylesheet" />
   </head>
   <body>
-    <img src="" alt="テスト画像" />
+    <div id="app">
+      <h1>Make me dynamic!</h1>
+    </div>
+    <script type="module">
+    import { createApp, reactive, ref } from 'vue'
+    
+    createApp({
+      setup() {
+        const counter = reactive({ count: 0 })
+        const message = ref('Hello World!')
+    
+        return {
+          counter,
+          message
+        }
+      }
+    }).mount('#app')
+    </script>
   </body>
 </html>
