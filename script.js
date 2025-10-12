@@ -1,6 +1,9 @@
 const { createApp, reactive, ref } = Vue;
+const { createVuetify } = Vuetify
 
-createApp({
+const vuetify = createVuetify()
+
+const app = createApp({
   setup() {
     const counter = reactive({ count: 0 })
     const message = ref('Hello World!')
@@ -10,4 +13,6 @@ createApp({
       message
     }
   }
-}).mount('#app')
+})
+  
+app.use(vuetify).mount('#app')
