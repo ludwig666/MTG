@@ -20,8 +20,8 @@
         <v-navigation-drawer>
           <v-list nav>
             <v-list-item title="Navigation drawer" link></v-list-item>
-            <v-list-item title="Function 1" link></v-list-item>
-            <v-list-item title="Function 2" link></v-list-item>
+            <v-list-item to="/" title="Function 1" link></v-list-item>
+            <v-list-item to="/calc" title="Function 2" link></v-list-item>
           </v-list>
         </v-navigation-drawer>
 
@@ -35,11 +35,19 @@
               width="100%"
             >
               {{ $route.fullPath }}
+              <router-view v-slot="{ Component }">
+                <v-fade-transition hide-on-leave>
+                  <component :is="Component" />
+                </v-fade-transition>
+              </router-view>
+              {{ $route.fullPath }}
             </v-sheet>
           </v-container>
         </v-main>
       </v-layout>
     </v-app>
-    <script src="./script.js"></script>
+    <script type="module" src="./MustCounter.js"></script>
+    <script type="module" src="./Calculator.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

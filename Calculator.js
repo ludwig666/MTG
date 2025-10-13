@@ -1,14 +1,14 @@
 const { ref } = Vue;
 
-const MustCounter = {
+const Calculator = {
   setup() {
     const count = ref(0);
     return { count };
   },
   template: `
     <button @click="count++">
-      You clicked me {{ count }} times.
+      Your calculator {{ count }}.
     </button>`,
 };
 
-export { MustCounter };
+export { Calculator };

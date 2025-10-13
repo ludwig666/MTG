@@ -2,14 +2,14 @@ const { createApp, reactive, ref } = Vue;
 const { createVuetify } = Vuetify;
 const { createRouter, createMemoryHistory } = VueRouter;
 
-// import MustCounter from "./MustCounter.js";
+import { MustCounter } from "./MustCounter.js";
+import { Calculator } from "./Calculator.js";
 
 const vuetify = createVuetify();
 
 const routes = [
-  { path: "/" },
-  // { path: "/", component: MustCounter },
-  // { path: '/about', component: AboutView },
+  { path: "/", component: MustCounter },
+  { path: "/calc", component: Calculator },
 ];
 
 const router = createRouter({
