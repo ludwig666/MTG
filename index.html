@@ -1,39 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>テストページ</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@3.10.5/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-  <v-app id="app">
-    <v-layout class="rounded rounded-md border">
-      <v-app-bar title="Application bar"></v-app-bar>
-    
-      <v-navigation-drawer>
-        <v-list nav>
-          <v-list-item title="Navigation drawer" link></v-list-item>
-          <v-list-item title="Function 1" link></v-list-item>
-          <v-list-item title="Function 2" link></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    
-      <v-main class="d-flex align-center justify-center" height="300">
-        <v-container>
-          <v-sheet
-            border="dashed md"
-            color="surface-light"
-            height="200"
-            rounded="lg"
-            width="100%"
-          ></v-sheet>
-        </v-container>
-      </v-main>
-    </v-layout>
-  </v-app>
-  <script src="./script.js"></script>
+    <v-app id="app">
+      <v-layout class="rounded rounded-md border">
+        <v-app-bar title="Application bar"></v-app-bar>
+
+        <v-navigation-drawer>
+          <v-list nav>
+            <v-list-item title="Navigation drawer" link></v-list-item>
+            <v-list-item title="Function 1" link></v-list-item>
+            <v-list-item title="Function 2" link></v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+
+        <v-main class="d-flex align-center justify-center" height="300">
+          <v-container>
+            <v-sheet
+              border="dashed md"
+              color="surface-light"
+              height="200"
+              rounded="lg"
+              width="100%"
+            >
+              {{ $route.fullPath }}
+            </v-sheet>
+          </v-container>
+        </v-main>
+      </v-layout>
+    </v-app>
+    <script src="./script.js"></script>
   </body>
 </html>
