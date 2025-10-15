@@ -8,11 +8,11 @@ const MustCounter = {
     const myCounters = ref(4);
     const myDeckSize = ref(60);
     const trials = ref(10000);
-    const result = ref("result");
-    const deckA = ref("deck A");
-    const deckB = ref("deck B");
-    const resultA = ref("result");
-    const resultB = ref("result");
+    const result = ref("");
+    const deckA = ref("");
+    const deckB = ref("");
+    const resultA = ref("");
+    const resultB = ref("");
 
     function setUp(counters, deckSize) {
       const array = Array(deckSize).fill(0);
@@ -47,7 +47,7 @@ const MustCounter = {
       return "WIN";
     }
 
-    function execute() {
+    function _execute() {
       const deck1 = setUp(opponentCounters.value, opponentDeckSize.value);
       const deck2 = setUp(myCounters.value, myDeckSize.value);
 
@@ -55,10 +55,26 @@ const MustCounter = {
       const deckBstr = deck2.toString();
 
       result.value = play(deck1, deck2);
-      resultA.value = deck1.toString();
-      deckA.value = deckAstr;
-      resultB.value = deck2.toString();
-      deckB.value = deckBstr;
+      // resultA.value = deck1.toString();
+      // deckA.value = deckAstr;
+      // resultB.value = deck2.toString();
+      // deckB.value = deckBstr;
+    }
+
+    function execute() {
+      let wins = 0;
+      for (let i = 0; i < trials.value; i++) {
+        const deck1 = setUp(opponentCounters.value, opponentDeckSize.value);
+        const deck2 = setUp(myCounters.value, myDeckSize.value);
+        const result = play(deck1, deck2);
+        if (result === "WIN") {
+          wins++;
+        } // else { do nothing }
+      } // for
+      const rate = (wins / trials.value) * 100;
+      result.value = `勝率: ${rate.toFixed(2)}% (${wins}勝 / ${
+        trials.value
+      }試行)`;
     }
 
     return {
