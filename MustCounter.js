@@ -9,6 +9,10 @@ const MustCounter = {
     const myDeckSize = ref(60);
     const trials = ref(10000);
     const result = ref("result");
+    const deckA = ref("deck A");
+    const deckB = ref("deck B");
+    const resultA = ref("result");
+    const resultB = ref("result");
 
     function setUp(counters, deckSize) {
       const array = Array(deckSize).fill(0);
@@ -19,11 +23,42 @@ const MustCounter = {
       return array;
     }
 
-    function execute() {
-      const opDeck = setUp(opponentCounters.value, opponentDeckSize.value);
-      const myDeck = setUp(myCounters.value, myDeckSize.value);
+    function play(opDeck, myDeck) {
+      let turns = 0;
+      let opHands = 0;
+      let myHands = 0;
+      for (let i = 0; i < 7; i++) {
+        opHands += opDeck.pop();
+        myHands += myDeck.pop();
+      }
+      while (opDeck.length > 0 && myDeck.length > 0) {
+        turns++;
+        opHands += opDeck.pop();
+        if (opHands > myHands) {
+          // opponent plays finisher
+          return "DEFEAT";
+        }
+        myHands += myDeck.pop();
+        if (opHands > myHands) {
+          // opponent plays finisher
+          return "DEFEAT";
+        }
+      }
+      return "WIN";
+    }
 
-      result.value = opDeck.toString() + "/" + myDeck.toString();
+    function execute() {
+      const deck1 = setUp(opponentCounters.value, opponentDeckSize.value);
+      const deck2 = setUp(myCounters.value, myDeckSize.value);
+
+      const deckAstr = deck1.toString();
+      const deckBstr = deck2.toString();
+
+      result.value = play(deck1, deck2);
+      resultA.value = deck1.toString();
+      deckA.value = deckAstr;
+      resultB.value = deck2.toString();
+      deckB.value = deckBstr;
     }
 
     return {
@@ -33,6 +68,10 @@ const MustCounter = {
       myDeckSize,
       trials,
       result,
+      deckA,
+      deckB,
+      resultA,
+      resultB,
       execute,
     };
   },
@@ -145,7 +184,19 @@ const MustCounter = {
       <h4>結果</h4>
     </v-row>
     <v-row>
-      {{ result }}
+      <div>{{ result }}</div>
+    </v-row>
+    <v-row>
+      <div>{{ deckA }}</div>
+    </v-row>
+    <v-row>
+      <div>{{ resultA }}</div>
+    </v-row>
+    <v-row>
+      <div>{{ deckB }}</div>
+    </v-row>
+    <v-row>
+      <div>{{ resultB }}</div>
     </v-row>
   </v-container>
 </v-sheet>
