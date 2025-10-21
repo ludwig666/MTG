@@ -209,7 +209,7 @@ const MustCounter = {
           reverse
           controlVariant="stacked"
           label="決着ターン数"
-          :max="100"
+          :max="250"
           :min="0"
           variant="solo"
         ></v-number-input>
