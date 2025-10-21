@@ -7,6 +7,7 @@ const MustCounter = {
     const opponentDeckSize = ref(60);
     const myCounters = ref(4);
     const myDeckSize = ref(60);
+    const finalTurns = ref(10);
     const trials = ref(10000);
     const result = ref("");
     const deckA = ref("");
@@ -27,11 +28,12 @@ const MustCounter = {
       let turns = 0;
       let opHands = 0;
       let myHands = 0;
+      let maxTurns = finalTurns.value;
       for (let i = 0; i < 7; i++) {
         opHands += opDeck.pop();
         myHands += myDeck.pop();
       }
-      while (opDeck.length > 0 && myDeck.length > 0) {
+      while (maxTurns >= turns && opDeck.length > 0 && myDeck.length > 0) {
         turns++;
         opHands += opDeck.pop();
         if (opHands > myHands) {
@@ -82,6 +84,7 @@ const MustCounter = {
       opponentDeckSize,
       myCounters,
       myDeckSize,
+      finalTurns,
       trials,
       result,
       deckA,
@@ -111,7 +114,7 @@ const MustCounter = {
       <li>対戦相手は毎ターン1枚ずつカードを引き、あなたも毎ターン1枚ずつカードを引きます。</li>
       <li>対戦相手はフィニッシャーを可能な限りプレイし、あなたは可能な限りカウンターします。</li>
       <li>フィニッシャーをカウンターできない場合、あなたの敗北です。</li>
-      <li>どちらかのデッキが尽きるまでゲームが続いた場合、あなたの勝利です。</li>
+      <li>指定した決着ターンが経過するか、どちらかのデッキが尽きるまでゲームが続いた場合、あなたの勝利です。</li>
       <li>
       <v-tooltip text="初期ライフが2点、対戦相手はショックと山、
         あなたは対抗呪文と島を任意の枚数デッキに入れることができ、
@@ -199,6 +202,17 @@ const MustCounter = {
         <v-btn icon @click="execute">
           <v-icon>mdi-calculator</v-icon>
         </v-btn>
+      </v-col>
+      <v-col>
+        <v-number-input
+          v-model="finalTurns"
+          reverse
+          controlVariant="stacked"
+          label="決着ターン数"
+          :max="250"
+          :min="0"
+          variant="solo"
+        ></v-number-input>
       </v-col>
       <v-col>
         <v-number-input
